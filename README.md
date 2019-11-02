@@ -1,5 +1,5 @@
 # fulcro-app-book
-Repository to store the app from fulcro book http://book.fulcrologic.com/fulcro3
+Repository to store the app I'm doing while following the fulcro book http://book.fulcrologic.com/fulcro3
 
 ## Setting Up
 
