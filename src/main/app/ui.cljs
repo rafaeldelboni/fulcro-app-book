@@ -1,14 +1,16 @@
 (ns app.ui
   (:require
     [com.fulcrologic.fulcro.dom :as dom]
-    [com.fulcrologic.fulcro.components :as comp :refer [defsc]]))
+    [com.fulcrologic.fulcro.components :as comp :refer [defsc]]
+    [app.mutations :as api]))
 
-(defsc Person [this {:person/keys [name age]}]
+(defsc Person [this {:person/keys [name age]} {:keys [onDelete]}]
   {:query         [:person/name :person/age]
    :initial-state (fn [{:keys [name age]}]
-                    {:person/name name :person/age age}) }
+                    {:person/name name :person/age age})}
   (dom/li
-    (dom/h5 (str name "(age: " age ")"))))
+    (dom/h5 (str name "(age: " age ")"))
+    (dom/button {:onClick #(onDelete name)} "X")))
 
 (def ui-person (comp/factory Person {:keyfn :person/name}))
 
@@ -22,10 +24,14 @@
                       (comp/get-initial-state Person {:name "Joe" :age 22})]
                      [(comp/get-initial-state Person {:name "Fred" :age 11})
                       (comp/get-initial-state Person {:name "Bobby" :age 55})])})}
-  (dom/div
-    (dom/h4 label)
-    (dom/ul
-      (map ui-person people))))
+  (let [delete-person
+        (fn [name]
+          (comp/transact! this [(api/delete-person {:list-name label :name name})]))]
+    (dom/div
+      (dom/h4 label)
+      (dom/ul
+        (map (fn [p]
+               (ui-person (comp/computed p {:onDelete delete-person}))) people)))))
 
 (def ui-person-list (comp/factory PersonList))
 
