@@ -20,7 +20,6 @@
         (fn [person-id]
           (comp/transact! this [(api/delete-person {:list/id id :person/id person-id})]))]
     (dom/div
-      (dom/h4 label)
       (dom/ul
         (map #(ui-person (comp/computed % {:onDelete delete-person})) people)))))
 

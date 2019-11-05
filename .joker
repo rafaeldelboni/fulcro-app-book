@@ -2,4 +2,5 @@
   com.fulcrologic.fulcro.components/defsc
   com.fulcrologic.fulcro.mutations/defmutation
   com.wsscode.pathom.connect/defresolver
+  com.wsscode.pathom.connect/defmutation
 ]}
