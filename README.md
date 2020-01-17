@@ -3,6 +3,9 @@ Repository to store the app I'm doing while following the fulcro book http://boo
 
 ## Setting Up
 
+You need to set this repo up and running before start:
+https://github.com/rafaeldelboni/fulcro-app-book-pathom
+
 The shadow-cljs compiler uses all js dependencies through
 NPM. If you use a library that is in cljsjs you will also have to add
 it to your `package.json`.
